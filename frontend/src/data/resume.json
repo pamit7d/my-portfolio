@@ -1,0 +1,202 @@
+{
+  "introduction": {
+    "name": "Amit Kumar Pandey",
+    "title": "Data Scientist • Machine Learning • Applied Engineering",
+    "location": "Patna, India",
+    "email": "21f3002439@ds.study.iitm.ac.in",
+    "phone": "91282 86451",
+    "socialLinks": {
+      "linkedin": "https://www.linkedin.com/in/amit-pandey-pamit7d",
+      "github": "https://github.com/pamit7d"
+    },
+    "summary": "Available for immediate joining | Open to contract-based full-time roles. Focusing on analytical impact, engineering discipline, and system thinking. Building scalable, free-tier compatible data solutions."
+  },
+  "experience": [
+    {
+      "id": 1,
+      "role": "Research Associate",
+      "company": "IIT Madras",
+      "duration": "July 2024 – Sep 2024",
+      "description": "Worked on the research project 'Demystifying Start‑Up Valuation' under Prof. Krishna Prasanna.",
+      "impact": [
+        "Collected, cleaned, and structured large-scale startup data from Tracxn datasets.",
+        "Validated data accuracy and consistency across multiple sources.",
+        "Maintained well-documented Excel and Google Sheets for analysis and reporting.",
+        "Supported research analysis by preparing datasets for modeling and interpretation."
+      ],
+      "keyTools": "MS Excel, Google Sheets, Python, Pandas"
+    },
+    {
+      "id": 2,
+      "role": "Research Intern",
+      "company": "IIT Mandi",
+      "duration": "Dec 2024 – Feb 2025",
+      "description": "Analyzed NASA satellite rainfall datasets to study precipitation patterns in the Himalayan region.",
+      "impact": [
+        "Performed data cleaning, transformation, and exploratory analysis using Python.",
+        "Extracted insights on rainfall variability and trends for academic reporting.",
+        "Supported startup ProbeStem with data-backed content and outreach materials.",
+        "Created structured documentation and visual summaries for stakeholders."
+      ],
+      "keyTools": "Python, Pandas, NumPy, Matplotlib, Excel"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Quiz Master – Exam Management Platform",
+      "tech": [
+        "Vue.js",
+        "Flask",
+        "PostgreSQL"
+      ],
+      "stats": "Structured DB Design",
+      "description": "Built a multi-user quiz and exam preparation platform with structured database design, user data management, and role-based access. Implemented frontend (VueJs) and backend logic for quiz creation, attempt tracking, result computation, and data integrity using Flask and PostgresSQL.",
+      "link": "#"
+    },
+    {
+      "id": 2,
+      "title": "Cinema Audience Forecasting",
+      "tech": [
+        "Time Series",
+        "Python",
+        "Pandas"
+      ],
+      "stats": "Demand Forecasts",
+      "description": "Developed a time-series forecasting pipeline to predict daily cinema audience counts across multiple theatre locations. Integrated multi-source datasets (BookNow, CinePOS, calendar data), performed feature engineering, and generated demand forecasts.",
+      "link": "#"
+    },
+    {
+      "id": 3,
+      "title": "Road Accident Analysis",
+      "tech": [
+        "Power BI",
+        "DAX",
+        "Python"
+      ],
+      "stats": "300k+ Records",
+      "description": "Cleaned and transformed 300,000+ UK road accident records using Python for data preprocessing and feature preparation. Built interactive Power BI dashboards using DAX to analyze accident severity, temporal trends, and environmental factors for data-driven insights.",
+      "link": "#"
+    }
+  ],
+  "education": [
+    {
+      "id": 1,
+      "degree": "BS in Data Science and Applications",
+      "university": "IIT Madras",
+      "year": "May 2022 - Dec 2026",
+      "details": "CGPA: 7.6",
+      "coursework": "Python, Machine Learning Foundation(MLF), Machine Learning Techniques(MLT), Machine Learning Practice(MLP), Deep Learning(DL), Modern Application Development, Python Programming, Database Management System(DBMS), Data Structure & Algorithms, Linux, Java, Business Data Management, Business Analytics, Mathematics for Data Science"
+    },
+    {
+      "id": 2,
+      "degree": "BSc (Statistics)",
+      "university": "Patna University",
+      "year": "May 2019 – May 2022",
+      "details": "Score: 70%"
+    }
+  ],
+  "skills": [
+    {
+      "category": "Programming & Querying",
+      "items": [
+        "Python",
+        "SQL",
+        "R",
+        "Java"
+      ]
+    },
+    {
+      "category": "Data & Analytics",
+      "items": [
+        "Pandas",
+        "NumPy",
+        "Matplotlib",
+        "scikit-learn",
+        "Power BI"
+      ]
+    },
+    {
+      "category": "Tools & Platforms",
+      "items": [
+        "MS Excel",
+        "Google Workspace",
+        "VS Code",
+        "PostgreSQL",
+        "Docker",
+        "AWS (Foundations)"
+      ]
+    },
+    {
+      "category": "Web & Apps",
+      "items": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Flask",
+        "FastAPI",
+        "Jinja",
+        "Vue.js"
+      ]
+    },
+    {
+      "category": "Design & Documentation",
+      "items": [
+        "Canva",
+        "Lightroom",
+        "Photoshop",
+        "Microsoft Word"
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "id": 1,
+      "title": "AWS Academy Graduate",
+      "organization": "Amazon Web Services",
+      "date": "2024",
+      "description": "Cloud Foundations Certification.",
+      "link": "https://www.credly.com/badges/d72c0455-45ad-4fe4-bb1c-9a32a7c19af9/linked_in_profile"
+    },
+    {
+      "id": 2,
+      "title": "AWS Educate ML Badge",
+      "organization": "Amazon Web Services",
+      "date": "2024",
+      "description": "Machine Learning Foundations.",
+      "link": "https://www.credly.com/badges/01b1a6d8-0a52-45d6-9e6b-4994e5695a02/linked_in_profile"
+    },
+    {
+      "id": 3,
+      "title": "HackerRank Certifications",
+      "organization": "HackerRank",
+      "date": "Ongoing",
+      "description": "Python (4★), SQL (3★), SQL Basic Certification.",
+      "link": "https://www.hackerrank.com/profile/pamit7d"
+    },
+    {
+      "id": 4,
+      "title": "Core Event Organizer",
+      "organization": "Paradox’23, IIT Madras",
+      "date": "2023",
+      "description": "Organized key events during the Paradox fest.",
+      "link": "https://study.iitm.ac.in/ds/paradox.html#sports"
+    },
+    {
+      "id": 5,
+      "title": "Social Worker",
+      "organization": "Strayniya Welfare Association",
+      "date": "2023–Present",
+      "description": "Volunteering for animal welfare.",
+      "link": "https://www.instagram.com/strayniya/?hl=en"
+    },
+    {
+      "id": 6,
+      "title": "Skating Coach",
+      "organization": "Innerfires Skating Academy",
+      "date": "2019–2020",
+      "description": "Trained students in skating.",
+      "link": "https://share.google/c2QqBfmu6UrkaU22X"
+    }
+  ]
+}

@@ -1,0 +1,350 @@
+/* Beyond Work - The Human Side Theme */
+/* GSAP-Ready: Static Layouts for ScrollTrigger Control */
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&family=Patrick+Hand&display=swap');
+
+.bw-wrapper {
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+    font-family: "Inter", system-ui, sans-serif;
+    color: #2d3436;
+}
+
+/* === 1. DYNAMIC BACKGROUND (Fixed) === */
+.bw-fixed-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #fffbf0 0%, #fff0e6 100%);
+    /* Initial Warm */
+    z-index: -1;
+    transition: background 1s ease;
+}
+
+/* === 2. FLIGHT PATH LAYER === */
+.bw-flight-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 99;
+    /* Higher z-index to ensure visibility */
+    overflow: visible;
+}
+
+/* === 3. CONTENT SECTIONS === */
+
+/* Hero */
+.bw-hero {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Centered */
+    padding-right: 0;
+    /* Removed right padding */
+    position: relative;
+    overflow: hidden;
+}
+
+.bw-hero-content {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    /* Changed to slide up for center align */
+    animation: bwHeroEnter 1.5s ease-out forwards 0.5s;
+    position: relative;
+    z-index: 5;
+}
+
+/* Hero Entrance Animation */
+@keyframes bwHeroEnter {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Caption for Polaroid */
+.bw-caption {
+    font-family: "Patrick Hand", cursive;
+    font-size: 1.2rem;
+    color: #555;
+    text-align: center;
+    margin-top: 10px;
+    line-height: 1.2;
+}
+
+.bw-hero h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 6.5rem;
+    /* Larger */
+    font-weight: 700;
+    color: #2d3436;
+    line-height: 1;
+    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+.bw-hero-tagline {
+    font-family: "Dancing Script", cursive;
+    font-size: 3.5rem;
+    color: #e67e22;
+    transform: rotate(-3deg);
+    display: inline-block;
+}
+
+/* Story Sections */
+.bw-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 5%;
+    position: relative;
+    z-index: 2;
+}
+
+/* Layout for Text/Image */
+.bw-section-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6rem;
+    /* Wider gap */
+    max-width: 1600px;
+    width: 100%;
+}
+
+.bw-section:nth-child(even) .bw-section-content {
+    flex-direction: row-reverse;
+}
+
+/* Text Side - Glass Frame */
+.bw-text-side {
+    flex: 1;
+    max-width: 650px;
+    background: rgba(255, 255, 255, 0.4);
+    /* More translucent */
+    padding: 3rem;
+    border-radius: 16px;
+    /* Soft corners */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(12px);
+    /* Frosted Glass */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.bw-title {
+    font-family: "Dancing Script", cursive;
+    font-size: 4.5rem;
+    color: #e67e22;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    flex-shrink: 0;
+    /* Keep title stable */
+}
+
+/* Fading Scroll Container */
+.bw-story-text {
+    overflow-y: auto;
+    max-height: 50vh;
+    /* Visible area height */
+    padding-right: 15px;
+    /* Visual balance */
+
+    /* Soft Fade Mask */
+    mask-image: linear-gradient(to bottom,
+            transparent 0%,
+            black 40px,
+            black calc(100% - 40px),
+            transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom,
+            transparent 0%,
+            black 40px,
+            black calc(100% - 40px),
+            transparent 100%);
+
+    /* Hide Scrollbar */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE/Edge */
+}
+
+.bw-story-text::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+.bw-story-text p {
+    font-size: 1.25rem;
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+    color: #2d3436;
+}
+
+/* Spacers to prevent cut-off at rest */
+.bw-story-text p:first-child {
+    margin-top: 40px;
+}
+
+.bw-story-text p:last-child {
+    margin-bottom: 40px;
+}
+
+/* Image Side (Restored Scattered Look) */
+/* Image Side - Collage Layout */
+.bw-image-side {
+    flex: 1;
+    position: relative;
+    /* Allow height to be determined by content + gap, but minimum to breathe */
+    min-height: 800px;
+    display: flex;
+    flex-direction: column;
+    /* Vertical Stack */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    /* No relative absolute madness for container */
+}
+
+/* Base Polaroid Card */
+.bw-polaroid {
+    background: #fff;
+    padding: 18px 18px 65px 18px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    /* Softer base shadow */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+
+    /* RELATIVE POSITIONING - The key to no overlap */
+    position: relative;
+
+    width: 300px;
+    /* Standardized Fixed Width */
+    cursor: pointer;
+    transform-origin: center;
+    border-radius: 3px;
+    will-change: transform;
+
+    /* Ensure no collapsing margins */
+    display: block;
+}
+
+/* Image Fit - Square Focus */
+.bw-polaroid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0;
+    filter: brightness(1.0) contrast(1.02);
+}
+
+/* --- FLEXBOX ZIG-ZAG LAYOUT (Strict No Overlap) --- */
+/* Using margins to push them around */
+
+/* 1. Top - Pushed Left */
+.bw-polaroid:nth-child(1) {
+    align-self: flex-start;
+    margin-left: 10%;
+    margin-bottom: -40px;
+    /* Slight visual overlap of *padding/paper*, not image */
+    transform: rotate(-3deg);
+    z-index: 2;
+}
+
+/* 2. Middle - Pushed Right */
+.bw-polaroid:nth-child(2) {
+    align-self: flex-end;
+    margin-right: 15%;
+    margin-bottom: -40px;
+    /* Slight visual overlap */
+    transform: rotate(2deg);
+    z-index: 3;
+}
+
+/* 3. Bottom - Pushed Left */
+.bw-polaroid:nth-child(3) {
+    align-self: flex-start;
+    margin-left: 15%;
+    transform: rotate(-2deg);
+    z-index: 1;
+}
+
+/* --- ALTERNATING HOVER EFFECTS --- */
+
+/* Base Hover */
+.bw-polaroid:hover {
+    z-index: 1000 !important;
+    transform: scale(2) rotate(0deg) !important;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+    /* Enhanced depth */
+}
+
+/* === 4. ENDING SCREEN === */
+.bw-ending {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.bw-ending h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 5rem;
+    color: #2d3436;
+    margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .bw-hero h1 {
+        font-size: 4.5rem;
+    }
+
+    .bw-section-content {
+        flex-direction: column !important;
+        gap: 3rem;
+    }
+
+    .bw-text-side {
+        width: 100%;
+        padding: 2rem;
+    }
+
+    .bw-image-side {
+        width: 100%;
+        min-height: auto;
+        /* Reset height for mobile */
+        padding: 2rem 0;
+    }
+
+    .bw-polaroid {
+        width: 100%;
+        max-width: 350px;
+        position: static;
+        /* Stack normally */
+
+        /* Reset manual margins for clean stacking */
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-bottom: 2rem !important;
+        /* Proper gap */
+        align-self: center !important;
+
+        transform: none !important;
+    }
+}

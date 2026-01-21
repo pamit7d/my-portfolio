@@ -1,0 +1,87 @@
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    /* Taller for modern look */
+    background: rgba(5, 5, 5, 0.6);
+    /* More transparent */
+    backdrop-filter: blur(16px);
+    /* Stronger blur for "glass" */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-content {
+    width: 100%;
+    max-width: var(--max-width);
+    padding: 0 3rem;
+    /* Wider padding */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    color: var(--text-main);
+}
+
+/* Glassy Links */
+.nav-links {
+    display: flex;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.5rem 1.5rem;
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 2.5rem;
+    list-style: none;
+}
+
+.nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    opacity: 1;
+    color: var(--accent);
+    text-shadow: 0 0 12px var(--accent);
+}
+
+/* Section Layouts */
+.section {
+    max-width: var(--max-width);
+    width: 95%;
+    margin: 0 auto;
+    padding: 6rem 1.5rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
+}

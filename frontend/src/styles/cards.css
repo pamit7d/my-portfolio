@@ -1,0 +1,298 @@
+/* Unified Card System */
+.project-card,
+.experience-item,
+.education-card,
+.achievement-card,
+.skill-card {
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hover Interaction: Lift & Glow */
+.project-card:hover,
+.experience-item:hover,
+.education-card:hover,
+.achievement-card:hover,
+.skill-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 242, 255, 0.8);
+    box-shadow:
+        0 10px 40px -10px rgba(0, 0, 0, 1),
+        0 0 15px rgba(0, 242, 255, 0.6),
+        0 0 30px rgba(0, 242, 255, 0.4),
+        inset 0 0 12px rgba(0, 242, 255, 0.1);
+}
+
+/* Text Color Adaptation on Hover */
+.project-card:hover .project-title,
+.experience-item:hover .job-role,
+.education-card:hover .degree,
+.achievement-card:hover .achievement-title,
+.skill-card:hover .skill-category,
+.project-card:hover .project-description,
+.experience-item:hover .job-duration,
+.experience-item:hover .job-role+div,
+.education-card:hover .university,
+.education-card:hover .details,
+.achievement-card:hover .achievement-org,
+.achievement-card:hover .achievement-desc,
+.skill-card:hover .skill-tag,
+.project-card:hover .project-stats,
+.experience-item:hover .job-company,
+.education-card:hover .university,
+.achievement-card:hover .achievement-date,
+.project-card:hover .tech-tag {
+    color: unset;
+    background: unset;
+}
+
+/* Transitions */
+.project-card *,
+.experience-item *,
+.education-card *,
+.achievement-card *,
+.skill-card * {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Gradient Overlay */
+.project-card::after,
+.experience-item::after,
+.education-card::after,
+.achievement-card::after,
+.skill-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(0, 242, 255, 0.05), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.project-card:hover::after,
+.experience-item:hover::after,
+.education-card:hover::after,
+.achievement-card:hover::after,
+.skill-card:hover::after {
+    opacity: 1;
+}
+
+/* Unified Tag Styles */
+.skill-tag,
+.tech-tag {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+}
+
+.skill-card:hover .skill-tag,
+.project-card:hover .tech-tag {
+    border-color: rgba(0, 242, 255, 0.3);
+    background: rgba(0, 242, 255, 0.05);
+    color: var(--text-main);
+}
+
+.skill-tag:hover,
+.tech-tag:hover {
+    transform: translateY(-2px) scale(1.05);
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.4);
+    color: #fff;
+}
+
+/* Projects Specifics */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.project-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.project-stats {
+    font-size: 0.8rem;
+    color: var(--accent);
+    background: rgba(0, 242, 255, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.project-description {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-links {
+    margin-top: auto;
+}
+
+/* Skills Specifics */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.skill-category {
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(0, 242, 255, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+/* Achievements Specifics */
+.achievements-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.achievement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.achievement-title {
+    font-size: 1.15rem;
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+.achievement-date {
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.9rem;
+    background: rgba(0, 242, 255, 0.05);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+.achievement-org {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+}
+
+.achievement-desc {
+    font-size: 0.95rem;
+    color: #d4d4d8;
+    line-height: 1.6;
+}
+
+/* Experience Specifics */
+.experience-list {
+    display: grid;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .experience-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.job-header {
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+.job-company {
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    display: block;
+}
+
+.job-role {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.job-duration {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.job-impact li::before {
+    content: '▹';
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+}
+
+.job-impact li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #d4d4d8;
+}
+
+/* Education Specifics */
+.education-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.university {
+    color: var(--accent);
+}
+
+.edu-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
