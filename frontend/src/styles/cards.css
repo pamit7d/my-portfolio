@@ -119,9 +119,33 @@
 
 /* Projects Specifics */
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    overflow-x: auto;
     gap: 2rem;
+    padding-bottom: 2rem;
+    /* Space for scrollbar and hover effects */
+    padding-top: 2rem;
+    /* Space for hover lift effect */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+
+    /* Hide scrollbar completely */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.projects-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.projects-grid .project-card {
+    min-width: 380px;
+    /* Standard card size */
+    max-width: 380px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-header {
@@ -200,28 +224,7 @@
     margin-bottom: 0.5rem;
 }
 
-.achievement-title {
-    font-size: 1.15rem;
-    color: var(--text-main);
-    font-weight: 700;
-}
-
-.achievement-date {
-    color: var(--accent);
-    font-family: monospace;
-    font-size: 0.9rem;
-    background: rgba(0, 242, 255, 0.05);
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-}
-
-.achievement-org {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 1rem;
-}
+/* ... existing styles ... */
 
 .achievement-desc {
     font-size: 0.95rem;

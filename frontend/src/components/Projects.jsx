@@ -21,8 +21,10 @@ const Projects = ({ data }) => {
                         </div>
 
                         <div className="project-links">
-                            <a href={project.link} className="btn-outline">GitHub</a>
-                            {/* Demo link could be added here */}
+                            <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-outline">GitHub</a>
+                            {project.demo && (
+                                <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-outline">Live Demo</a>
+                            )}
                         </div>
                     </div>
                 ))}

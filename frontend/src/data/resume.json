@@ -44,15 +44,17 @@
   "projects": [
     {
       "id": 1,
-      "title": "Quiz Master – Exam Management Platform",
+      "title": "CampusX Patient Management System",
       "tech": [
-        "Vue.js",
-        "Flask",
-        "PostgreSQL"
+        "FastAPI",
+        "PostgreSQL",
+        "Docker",
+        "Render"
       ],
-      "stats": "Structured DB Design",
-      "description": "Built a multi-user quiz and exam preparation platform with structured database design, user data management, and role-based access. Implemented frontend (VueJs) and backend logic for quiz creation, attempt tracking, result computation, and data integrity using Flask and PostgresSQL.",
-      "link": "#"
+      "stats": "Full-Stack Setup",
+      "description": "A robust, full-stack patient management system with role-based access for Admins, Doctors, and Patients. Features real-time dashboards, appointment scheduling with conflict detection, and secure JWT authentication. Deployed on Render with a PostgreSQL database.",
+      "link": "https://github.com/pamit7d/fastapi-patient-management-system",
+      "demo": "https://campusx-pms.onrender.com/"
     },
     {
       "id": 2,
@@ -64,7 +66,8 @@
       ],
       "stats": "Demand Forecasts",
       "description": "Developed a time-series forecasting pipeline to predict daily cinema audience counts across multiple theatre locations. Integrated multi-source datasets (BookNow, CinePOS, calendar data), performed feature engineering, and generated demand forecasts.",
-      "link": "#"
+      "link": "#",
+      "demo": "https://www.kaggle.com/competitions/Cinema_Audience_Forecasting_challenge/data"
     },
     {
       "id": 3,
@@ -76,6 +79,19 @@
       ],
       "stats": "300k+ Records",
       "description": "Cleaned and transformed 300,000+ UK road accident records using Python for data preprocessing and feature preparation. Built interactive Power BI dashboards using DAX to analyze accident severity, temporal trends, and environmental factors for data-driven insights.",
+      "link": "#",
+      "demo": "#"
+    },
+    {
+      "id": 4,
+      "title": "Quiz Master – Exam Management Platform",
+      "tech": [
+        "Vue.js",
+        "Flask",
+        "PostgreSQL"
+      ],
+      "stats": "Structured DB Design",
+      "description": "Built a multi-user quiz and exam preparation platform with structured database design, user data management, and role-based access. Implemented frontend (VueJs) and backend logic for quiz creation, attempt tracking, result computation, and data integrity using Flask and PostgresSQL.",
       "link": "#"
     }
   ],
