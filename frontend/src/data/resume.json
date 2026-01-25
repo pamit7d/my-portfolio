@@ -43,6 +43,20 @@
   ],
   "projects": [
     {
+      "id": 5,
+      "title": "Insurance Premium Prediction App",
+      "tech": [
+        "FastAPI",
+        "Streamlit",
+        "Scikit-learn",
+        "Pandas"
+      ],
+      "stats": "ML Deployment",
+      "description": "A full-stack machine learning application that predicts insurance premium categories based on user details. Features a FastAPI backend and a Streamlit frontend, deployed on Render and Streamlit Cloud.",
+      "link": "https://github.com/pamit7d/fastapi-insurance-prediction-model",
+      "demo": "https://fastapi-insurance-prediction-model-iqpjcl2cjsatkqb4nefrss.streamlit.app/"
+    },
+    {
       "id": 1,
       "title": "CampusX Patient Management System",
       "tech": [
