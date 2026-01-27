@@ -181,6 +181,24 @@
   ],
   "achievements": [
     {
+      "id": 7,
+      "title": "Advanced Certificate in Machine Learning and Data Science",
+      "organization": "IIT Madras",
+      "date": "Jan 2025",
+      "description": "Successfully completed the Advanced Certificate in Machine Learning and Data Science.",
+      "link": "https://drive.google.com/file/d/1D07qh3Vm7P4Y_ys03i8eIT2sOH_Vv1i8/view?usp=sharing",
+      "image": "/certificates/iitm-advanced-cert.png"
+    },
+    {
+      "id": 8,
+      "title": "Implementing Machine Learning Techniques using Numpy",
+      "organization": "IIT Madras",
+      "date": "Jan 6, 2025 - Jan 9, 2025",
+      "description": "Workshop on Implementing Machine Learning Techniques using Numpy.",
+      "link": "https://drive.google.com/file/d/1G4mLCY2MRODERdAMnKUTI2DV6MK3rYE2/view?usp=sharing",
+      "image": "/certificates/mlt-workshop-cert.png"
+    },
+    {
       "id": 1,
       "title": "AWS Academy Graduate",
       "organization": "Amazon Web Services",

@@ -15,6 +15,27 @@ const Achievements = ({ data }) => {
                         </div>
                         <p className="achievement-org">{item.organization}</p>
                         <p className="achievement-desc">{item.description}</p>
+                        {item.image && (
+                            <div className="achievement-image" style={{
+                                marginTop: '1rem',
+                                marginBottom: '1rem',
+                                display: 'flex',
+                                justifyContent: 'center'
+                            }}>
+                                <img
+                                    src={item.image}
+                                    alt={item.title}
+                                    style={{
+                                        width: '50%',
+                                        maxWidth: '400px',
+                                        height: 'auto',
+                                        borderRadius: '8px',
+                                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+                                    }}
+                                />
+                            </div>
+                        )}
                         {item.link && (
                             <a href={item.link} target="_blank" rel="noopener noreferrer"
                                 style={{
