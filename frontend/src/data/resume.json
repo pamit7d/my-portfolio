@@ -58,17 +58,17 @@
     },
     {
       "id": 1,
-      "title": "CampusX Patient Management System",
+      "title": "Patient Management System",
       "tech": [
         "FastAPI",
         "PostgreSQL",
         "Docker",
-        "Render"
+        "Vercel"
       ],
       "stats": "Full-Stack Setup",
       "description": "A robust, full-stack patient management system with role-based access for Admins, Doctors, and Patients. Features real-time dashboards, appointment scheduling with conflict detection, and secure JWT authentication. Deployed on Render with a PostgreSQL database.",
       "link": "https://github.com/pamit7d/fastapi-patient-management-system",
-      "demo": "https://campusx-pms.onrender.com/"
+      "demo": "https://fastapi-patient-management-system.vercel.app/"
     },
     {
       "id": 2,
