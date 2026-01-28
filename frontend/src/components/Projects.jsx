@@ -2,29 +2,13 @@ import React, { useState } from 'react';
 import Section from './Section';
 
 const Projects = ({ data }) => {
-    const [activeCard, setActiveCard] = useState(null);
-
-    const handleCardClick = (id) => {
-        setActiveCard(activeCard === id ? null : id);
-    };
-
     return (
         <Section title="Selected Projects" className="projects-section" id="projects">
             <div className="projects-grid">
                 {data.map((project) => (
                     <div
                         key={project.id}
-                        className={`project-card ${activeCard === project.id ? 'card-active' : ''}`}
-                        onClick={() => handleCardClick(project.id)}
-                        tabIndex="0"
-                        role="button"
-                        aria-pressed={activeCard === project.id}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                                e.preventDefault();
-                                handleCardClick(project.id);
-                            }
-                        }}
+                        className="project-card"
                     >
                         <div className="project-header">
                             <h3 className="project-title">{project.title}</h3>

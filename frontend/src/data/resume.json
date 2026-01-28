@@ -43,6 +43,19 @@
   ],
   "projects": [
     {
+      "id": 6,
+      "title": "Pastebin Lite",
+      "tech": [
+        "Next.js",
+        "Redis",
+        "Tailwind CSS"
+      ],
+      "stats": "Serverless App",
+      "description": "A simple, robust pastebin application built with Next.js and Vercel KV (Redis). It allows creating text pastes with optional TTL and Max View Limits. Features shareable links and atomic operations for view counting.",
+      "link": "https://github.com/pamit7d/pastebin-lite",
+      "demo": "https://pastebin-lite-umber-three.vercel.app/"
+    },
+    {
       "id": 5,
       "title": "Insurance Premium Prediction App",
       "tech": [
