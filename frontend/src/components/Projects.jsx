@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Section from './Section';
 
 const Projects = ({ data }) => {
+    const [activeCard, setActiveCard] = useState(null);
+
+    const handleCardClick = (id) => {
+        setActiveCard(activeCard === id ? null : id);
+    };
+
     return (
         <Section title="Selected Projects" className="projects-section" id="projects">
             <div className="projects-grid">
                 {data.map((project) => (
-                    <div key={project.id} className="project-card">
+                    <div
+                        key={project.id}
+                        className={`project-card ${activeCard === project.id ? 'card-active' : ''}`}
+                        onClick={() => handleCardClick(project.id)}
+                        tabIndex="0"
+                        role="button"
+                        aria-pressed={activeCard === project.id}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                handleCardClick(project.id);
+                            }
+                        }}
+                    >
                         <div className="project-header">
                             <h3 className="project-title">{project.title}</h3>
                             <div className="project-stats">{project.stats}</div>
@@ -21,9 +40,9 @@ const Projects = ({ data }) => {
                         </div>
 
                         <div className="project-links">
-                            <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-outline">GitHub</a>
+                            <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-outline" onClick={(e) => e.stopPropagation()}>GitHub</a>
                             {project.demo && (
-                                <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-outline">Live Demo</a>
+                                <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-outline" onClick={(e) => e.stopPropagation()}>Live Demo</a>
                             )}
                         </div>
                     </div>

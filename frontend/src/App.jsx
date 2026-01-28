@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Experience from './components/Experience';
@@ -7,9 +7,26 @@ import Education from './components/Education';
 import Skills from './components/Skills';
 import Achievements from './components/Achievements';
 import Footer from './components/Footer';
-import BeyondWork from './components/BeyondWork';
 import resumeData from './data/resume.json';
 import './styles/main.css';
+
+// Lazy load BeyondWork to prevent navigation lag
+const BeyondWork = lazy(() => import('./components/BeyondWork'));
+
+// Loading component
+const PageLoader = () => (
+  <div style={{
+    height: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: '#00f2ff',
+    fontSize: '1.2rem',
+    background: '#050505'
+  }}>
+    Loading...
+  </div>
+);
 
 function App() {
   const [view, setView] = useState('professional');
@@ -33,7 +50,9 @@ function App() {
           />
         </>
       ) : (
-        <BeyondWork />
+        <Suspense fallback={<PageLoader />}>
+          <BeyondWork />
+        </Suspense>
       )}
     </div>
   );

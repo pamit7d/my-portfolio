@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Achievements = ({ data }) => {
+    const [activeId, setActiveId] = useState(null);
+
     if (!data) return null;
+
+    const handleItemClick = (id) => {
+        setActiveId(activeId === id ? null : id);
+    };
 
     return (
         <section className="section achievements-section" id="achievements">
             <h2 className="section-title">Achievements & Activities</h2>
             <div className="achievements-grid">
                 {data.map((item) => (
-                    <div key={item.id} className="achievement-card">
+                    <div
+                        key={item.id}
+                        className={`achievement-card ${activeId === item.id ? 'card-active' : ''}`}
+                        onClick={() => handleItemClick(item.id)}
+                        tabIndex="0"
+                        role="button"
+                        aria-pressed={activeId === item.id}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                handleItemClick(item.id);
+                            }
+                        }}
+                    >
                         <div className="achievement-header">
                             <h3 className="achievement-title">{item.title}</h3>
                             <span className="achievement-date">{item.date}</span>
@@ -38,6 +57,7 @@ const Achievements = ({ data }) => {
                         )}
                         {item.link && (
                             <a href={item.link} target="_blank" rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
                                 style={{
                                     display: 'inline-block',
                                     marginTop: '0.8rem',

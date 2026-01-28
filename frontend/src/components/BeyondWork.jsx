@@ -223,13 +223,20 @@ const BeyondWork = () => {
 
     const Polaroid = ({ src, alt, caption }) => (
         <div className="bw-polaroid">
-            <img src={src} alt={alt} onError={(e) => { e.target.style.opacity = '0.1'; e.target.parentElement.style.background = '#f0f0f0'; }} />
+            <img
+                src={src}
+                alt={alt}
+                loading="lazy"
+                decoding="async"
+                onError={(e) => { e.target.style.opacity = '0.1'; e.target.parentElement.style.background = '#f0f0f0'; }}
+            />
             {caption && <div className="bw-caption">{caption}</div>}
         </div>
     );
 
     // Force refresh on load
     React.useEffect(() => {
+        window.scrollTo(0, 0); // Ensure start at top
         const handleLoad = () => ScrollTrigger.refresh();
         window.addEventListener('load', handleLoad);
         return () => window.removeEventListener('load', handleLoad);
@@ -242,7 +249,7 @@ const BeyondWork = () => {
             <div ref={bgRef} className="bw-fixed-bg"></div>
 
             {/* FLIGHT LAYER - FIXED POSITION */}
-            <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 99999, pointerEvents: 'none' }}>
+            <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 900, pointerEvents: 'none' }}>
                 <div ref={planeRef} className="bw-paper-plane" style={{
                     width: '150px',
                     height: 'auto',

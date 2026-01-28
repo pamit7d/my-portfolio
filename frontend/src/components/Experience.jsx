@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Section from './Section';
 
 const Experience = ({ data }) => {
+    const [activeJob, setActiveJob] = useState(null);
+
+    const handleJobClick = (id) => {
+        setActiveJob(activeJob === id ? null : id);
+    };
+
     return (
         <Section title="Selected Experience" className="experience-section" id="experience">
             <div className="experience-list">
                 {data.map((job) => (
-                    <div key={job.id} className="experience-item">
+                    <div
+                        key={job.id}
+                        className={`experience-item ${activeJob === job.id ? 'card-active' : ''}`}
+                        onClick={() => handleJobClick(job.id)}
+                        tabIndex="0"
+                        role="button"
+                        aria-pressed={activeJob === job.id}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                handleJobClick(job.id);
+                            }
+                        }}
+                    >
                         <div className="job-header">
                             <span className="job-company">{job.company}</span>
                             <h3 className="job-role">{job.role}</h3>

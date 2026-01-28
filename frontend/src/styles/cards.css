@@ -16,12 +16,22 @@
     flex-direction: column;
 }
 
-/* Hover Interaction: Lift & Glow */
+/* Unified Hover & Active States */
 .project-card:hover,
+.project-card:focus-visible,
+.project-card.card-active,
 .experience-item:hover,
+.experience-item:focus-visible,
+.experience-item.card-active,
 .education-card:hover,
+.education-card:focus-visible,
+.education-card.card-active,
 .achievement-card:hover,
-.skill-card:hover {
+.achievement-card:focus-visible,
+.achievement-card.card-active,
+.skill-card:hover,
+.skill-card:focus-visible,
+.skill-card.card-active {
     transform: translateY(-8px);
     border-color: rgba(0, 242, 255, 0.8);
     box-shadow:
@@ -29,27 +39,66 @@
         0 0 15px rgba(0, 242, 255, 0.6),
         0 0 30px rgba(0, 242, 255, 0.4),
         inset 0 0 12px rgba(0, 242, 255, 0.1);
+    z-index: 10;
+    outline: none;
+    /* Focus handled by border/glow */
 }
 
-/* Text Color Adaptation on Hover */
+/* Text Color Adaptation on Hover/Active */
 .project-card:hover .project-title,
+.project-card:focus-visible .project-title,
+.project-card.card-active .project-title,
 .experience-item:hover .job-role,
+.experience-item:focus-visible .job-role,
+.experience-item.card-active .job-role,
 .education-card:hover .degree,
+.education-card:focus-visible .degree,
+.education-card.card-active .degree,
 .achievement-card:hover .achievement-title,
+.achievement-card:focus-visible .achievement-title,
+.achievement-card.card-active .achievement-title,
 .skill-card:hover .skill-category,
+.skill-card:focus-visible .skill-category,
+.skill-card.card-active .skill-category,
 .project-card:hover .project-description,
+.project-card:focus-visible .project-description,
+.project-card.card-active .project-description,
 .experience-item:hover .job-duration,
+.experience-item:focus-visible .job-duration,
+.experience-item.card-active .job-duration,
 .experience-item:hover .job-role+div,
+.experience-item:focus-visible .job-role+div,
+.experience-item.card-active .job-role+div,
 .education-card:hover .university,
+.education-card:focus-visible .university,
+.education-card.card-active .university,
 .education-card:hover .details,
+.education-card:focus-visible .details,
+.education-card.card-active .details,
 .achievement-card:hover .achievement-org,
+.achievement-card:focus-visible .achievement-org,
+.achievement-card.card-active .achievement-org,
 .achievement-card:hover .achievement-desc,
+.achievement-card:focus-visible .achievement-desc,
+.achievement-card.card-active .achievement-desc,
 .skill-card:hover .skill-tag,
+.skill-card:focus-visible .skill-tag,
+.skill-card.card-active .skill-tag,
 .project-card:hover .project-stats,
+.project-card:focus-visible .project-stats,
+.project-card.card-active .project-stats,
 .experience-item:hover .job-company,
+.experience-item:focus-visible .job-company,
+.experience-item.card-active .job-company,
 .education-card:hover .university,
+.education-card:focus-visible .university,
+.education-card.card-active .university,
 .achievement-card:hover .achievement-date,
-.project-card:hover .tech-tag {
+.achievement-card:focus-visible .achievement-date,
+.achievement-card.card-active .achievement-date,
+.project-card:hover .tech-tag,
+.project-card:focus-visible .tech-tag,
+.project-card.card-active .tech-tag {
     color: unset;
     background: unset;
 }
@@ -83,10 +132,20 @@
 }
 
 .project-card:hover::after,
+.project-card:focus-visible::after,
+.project-card.card-active::after,
 .experience-item:hover::after,
+.experience-item:focus-visible::after,
+.experience-item.card-active::after,
 .education-card:hover::after,
+.education-card:focus-visible::after,
+.education-card.card-active::after,
 .achievement-card:hover::after,
-.skill-card:hover::after {
+.achievement-card:focus-visible::after,
+.achievement-card.card-active::after,
+.skill-card:hover::after,
+.skill-card:focus-visible::after,
+.skill-card.card-active::after {
     opacity: 1;
 }
 
@@ -103,7 +162,11 @@
 }
 
 .skill-card:hover .skill-tag,
-.project-card:hover .tech-tag {
+.skill-card:focus-visible .skill-tag,
+.skill-card.card-active .skill-tag,
+.project-card:hover .tech-tag,
+.project-card:focus-visible .tech-tag,
+.project-card.card-active .tech-tag {
     border-color: rgba(0, 242, 255, 0.3);
     background: rgba(0, 242, 255, 0.05);
     color: var(--text-main);
@@ -119,33 +182,56 @@
 
 /* Projects Specifics */
 .projects-grid {
-    display: flex;
-    overflow-x: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
     padding-bottom: 2rem;
-    /* Space for scrollbar and hover effects */
-    padding-top: 2rem;
-    /* Space for hover lift effect */
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-
-    /* Hide scrollbar completely */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.projects-grid::-webkit-scrollbar {
-    display: none;
+    padding-top: 1rem;
 }
 
 .projects-grid .project-card {
-    min-width: 380px;
-    /* Standard card size */
-    max-width: 380px;
-    scroll-snap-align: start;
+    min-width: unset;
+    max-width: unset;
     display: flex;
     flex-direction: column;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        /* Increase gap for better separation */
+        padding-right: 0;
+        /* Ensure no extra padding causes width issues */
+    }
+
+    /* Allow standard hover to work even on mobile/small screens.
+       Z-index management in the global scope prevents overlap issues. */
+
+    /* FORCE full desktop effect when active (tapped) */
+    .project-card.card-active,
+    .experience-item.card-active,
+    .education-card.card-active,
+    .achievement-card.card-active,
+    .skill-card.card-active {
+        transform: translateY(-8px) !important;
+        box-shadow:
+            0 10px 40px -10px rgba(0, 0, 0, 1),
+            0 0 15px rgba(0, 242, 255, 0.6),
+            0 0 30px rgba(0, 242, 255, 0.4),
+            inset 0 0 12px rgba(0, 242, 255, 0.1) !important;
+        border-color: rgba(0, 242, 255, 0.8) !important;
+        z-index: 100;
+    }
+
+    .project-card {
+        height: auto;
+        /* Let content dictate height */
+        min-height: auto;
+        margin-bottom: 0;
+        /* Reset margins */
+    }
 }
 
 .project-header {
