@@ -43,17 +43,19 @@ const BeyondWork = () => {
         // Hero = index 0
         const allSegments = [hero, ...sections, ending].filter(Boolean);
 
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        const margin = 100;
+        // Initialize State with current dimensions
+        // We'll update targets dynamically in onUpdate
+        let winWidth = window.innerWidth;
+        let winHeight = window.innerHeight;
+        let margin = winWidth <= 768 ? 50 : 100;
 
         // Physics State
         const state = {
-            currentX: width - margin,
-            currentY: height * 0.65, // Start lower in Hero (65%)
+            currentX: winWidth - margin,
+            currentY: winHeight * 0.65,
             currentScale: 1,
-            targetX: width - margin,
-            targetY: height * 0.65,
+            targetX: winWidth - margin,
+            targetY: winHeight * 0.65,
             targetScale: 1,
             rotation: 0,
             forceLevel: false
@@ -67,6 +69,14 @@ const BeyondWork = () => {
             opacity: 1
         });
 
+        // Handle Resize to keep state in sync
+        const handleResize = () => {
+            winWidth = window.innerWidth;
+            winHeight = window.innerHeight;
+            margin = winWidth <= 768 ? 50 : 100;
+        };
+        window.addEventListener('resize', handleResize);
+
         // Setup Scroll Triggers for Target Calculation
         allSegments.forEach((section, i) => {
             if (!section) return;
@@ -77,6 +87,10 @@ const BeyondWork = () => {
                 end: "bottom top",
                 onUpdate: (self) => {
                     // Logic: Where should the plane be?
+                    // capture fresh dimensions from closure variables updated by resize
+                    const w = winWidth;
+                    const h = winHeight;
+                    const m = margin;
 
                     let sectionStartX, sectionEndX;
 
@@ -86,26 +100,20 @@ const BeyondWork = () => {
                         const prevIndex = i - 1;
                         if (prevIndex >= 0) {
                             const prevIsEven = prevIndex % 2 === 0;
-                            // If prev was even: Right -> Left. End is Left (margin).
-                            // If prev was odd: Left -> Right. End is Right (width-margin).
-                            sectionStartX = prevIsEven ? margin : width - margin;
+                            sectionStartX = prevIsEven ? m : w - m;
                         } else {
-                            sectionStartX = width / 2;
+                            sectionStartX = w / 2;
                         }
 
                         // Destination: Center of screen
-                        sectionEndX = width / 2;
+                        sectionEndX = w / 2;
 
                         // Target Y: Fly smoothly to bottom
-                        // User wants it "Just below the last text line".
-                        // Text is usually vertically centered or slightly up. 
-                        // 85% is a safe bet for "below".
-                        state.targetY = gsap.utils.interpolate(height * 0.3, height * 0.85, self.progress);
+                        state.targetY = gsap.utils.interpolate(h * 0.3, h * 0.85, self.progress);
 
                         state.targetScale = 1.0;
 
                         // Force Horizontal Landing
-                        // As we approach the end of the scroll (progress > 0.6), level out.
                         if (self.progress > 0.6) {
                             state.forceLevel = true;
                         } else {
@@ -115,16 +123,14 @@ const BeyondWork = () => {
                     } else {
                         // --- NORMAL FLIGHT ---
                         const isEven = i % 2 === 0;
-                        sectionStartX = isEven ? width - margin : margin;
-                        sectionEndX = isEven ? margin : width - margin;
+                        sectionStartX = isEven ? w - m : m;
+                        sectionEndX = isEven ? m : w - m;
 
                         // Y-Axis Band
-                        // Hero starts lower (65% -> 75%)
                         if (i === 0) {
-                            state.targetY = gsap.utils.interpolate(height * 0.65, height * 0.75, self.progress);
+                            state.targetY = gsap.utils.interpolate(h * 0.65, h * 0.75, self.progress);
                         } else {
-                            // Normal Sections
-                            state.targetY = gsap.utils.interpolate(height * 0.3, height * 0.7, self.progress);
+                            state.targetY = gsap.utils.interpolate(h * 0.3, h * 0.7, self.progress);
                         }
 
                         state.targetScale = 1.0;
@@ -216,7 +222,9 @@ const BeyondWork = () => {
 
         return () => {
             gsap.ticker.remove(updatePhysics);
+            gsap.ticker.remove(updatePhysics);
             ScrollTrigger.getAll().forEach(t => t.kill());
+            window.removeEventListener('resize', handleResize);
         };
 
     }, { scope: containerRef });
@@ -251,7 +259,7 @@ const BeyondWork = () => {
             {/* FLIGHT LAYER - FIXED POSITION */}
             <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 900, pointerEvents: 'none' }}>
                 <div ref={planeRef} className="bw-paper-plane" style={{
-                    width: '150px',
+                    // Width is now handled in CSS for responsiveness
                     height: 'auto',
                     position: 'absolute',
                     top: 0,

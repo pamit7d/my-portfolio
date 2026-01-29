@@ -37,6 +37,11 @@
     overflow: visible;
 }
 
+.bw-paper-plane {
+    width: 150px;
+    /* Default Desktop Width */
+}
+
 /* === 3. CONTENT SECTIONS === */
 
 /* Hero */
@@ -346,5 +351,87 @@
         align-self: center !important;
 
         transform: none !important;
+    }
+}
+
+/* === MOBILE SPECIFIC ADJUSTMENTS (<768px) === */
+@media (max-width: 768px) {
+
+    /* 1. Typography Scaling */
+    .bw-hero h1 {
+        font-size: 2.5rem;
+        /* Significantly reduced */
+    }
+
+    .bw-hero-tagline {
+        font-size: 1.8rem;
+    }
+
+    .bw-title {
+        font-size: 2.5rem;
+        /* Reduced from 4.5rem */
+    }
+
+    .bw-story-text p {
+        font-size: 1.1rem;
+        /* Slightly smaller for readability */
+        line-height: 1.6;
+        text-align: left;
+        /* Justify can look weird on narrow screens */
+    }
+
+    /* 2. Compact Spacing */
+    .bw-section {
+        padding: 2rem 1rem;
+        /* Less horizontal padding */
+        min-height: auto;
+        /* Allow natural height */
+    }
+
+    .bw-text-side {
+        padding: 1.2rem;
+        /* Tighter internal spacing */
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.6);
+        /* Slightly more opaque for readability */
+    }
+
+    .bw-section-content {
+        gap: 2rem;
+        /* Reduce gap between text and images */
+    }
+
+    /* 3. Paper Plane - Scale Down */
+    .bw-paper-plane {
+        width: 60px;
+        /* Much smaller */
+        /* Opacity/Filter adjustments if needed can be added here */
+    }
+
+    .bw-flight-container {
+        z-index: 50;
+        /* Lower z-index so it doesn't block interactions if things overlap */
+    }
+
+    /* 4. Images */
+    .bw-polaroid {
+        max-width: 300px;
+        /* Limit width */
+        margin: 0 auto !important;
+        /* Center it */
+        padding: 12px 12px 50px 12px;
+        /* Smaller frame */
+    }
+
+    /* 5. Ending Header */
+    .bw-ending h2 {
+        font-size: 3rem;
+    }
+
+    /* REDUCED HOVER SCALE FOR MOBILE */
+    .bw-polaroid:hover {
+        transform: scale(1.5) rotate(0deg) !important;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25) !important;
+        z-index: 1000 !important;
     }
 }
