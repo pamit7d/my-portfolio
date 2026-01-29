@@ -430,7 +430,7 @@
 
     /* REDUCED HOVER SCALE FOR MOBILE */
     .bw-polaroid:hover {
-        transform: scale(1.5) rotate(0deg) !important;
+        transform: scale(1.1) rotate(0deg) !important;
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25) !important;
         z-index: 1000 !important;
     }
