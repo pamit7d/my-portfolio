@@ -354,6 +354,14 @@
     }
 }
 
+/* === TABLET SPECIFIC ADJUSTMENTS (768px - 1024px) === */
+@media (max-width: 1024px) {
+    .bw-paper-plane {
+        width: 100px;
+        /* Intermediate size for tablets */
+    }
+}
+
 /* === MOBILE SPECIFIC ADJUSTMENTS (<768px) === */
 @media (max-width: 768px) {
 
