@@ -357,24 +357,62 @@ const LampScene = () => {
       return null;
     }
 
-    const onPointerDown = (e) => {
+    const getEventPoint = (event) => {
+      const source = event?.touches?.[0] || event?.changedTouches?.[0] || event;
+      return { x: source.clientX, y: source.clientY };
+    };
+
+    const beginInteraction = (event) => {
       const a = audio();
       if (a && a.state === 'suspended') {
         a.resume();
       }
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
+      const { x, y } = getEventPoint(event);
+      mouse.x = x;
+      mouse.y = y;
       grab = hitTest(mouse.x, mouse.y);
       if (!grab) {
         return;
       }
-      canvas.setPointerCapture(e.pointerId);
+      if (event && typeof event.preventDefault === 'function') {
+        event.preventDefault();
+      }
+      if (typeof canvas.setPointerCapture === 'function' && typeof event?.pointerId === 'number') {
+        try {
+          canvas.setPointerCapture(event.pointerId);
+        } catch (error) {
+          // Some mobile browsers do not support pointer capture reliably during touch input.
+        }
+      }
       canvas.style.cursor = 'grabbing';
     };
 
+    const onPointerDown = (e) => {
+      beginInteraction(e);
+    };
+
     const onPointerMove = (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
+      const { x, y } = getEventPoint(e);
+      mouse.x = x;
+      mouse.y = y;
+      if (grab) return;
+      canvas.style.cursor = hitTest(mouse.x, mouse.y) ? 'grab' : 'default';
+    };
+
+    const onTouchStart = (e) => {
+      if (window.PointerEvent) {
+        return;
+      }
+      beginInteraction(e);
+    };
+
+    const onTouchMove = (e) => {
+      if (window.PointerEvent) {
+        return;
+      }
+      const { x, y } = getEventPoint(e);
+      mouse.x = x;
+      mouse.y = y;
       if (grab) return;
       canvas.style.cursor = hitTest(mouse.x, mouse.y) ? 'grab' : 'default';
     };
@@ -388,10 +426,38 @@ const LampScene = () => {
       canvas.style.cursor = 'default';
     }
 
-    canvas.addEventListener('pointerdown', onPointerDown);
-    canvas.addEventListener('pointermove', onPointerMove);
-    canvas.addEventListener('pointerup', release);
-    canvas.addEventListener('pointercancel', release);
+    const onPointerUp = (e) => {
+      if (typeof e?.preventDefault === 'function') {
+        e.preventDefault();
+      }
+      if (typeof canvas.releasePointerCapture === 'function' && typeof e?.pointerId === 'number') {
+        try {
+          canvas.releasePointerCapture(e.pointerId);
+        } catch (error) {
+          // Ignore capture release errors on touch devices.
+        }
+      }
+      release();
+    };
+
+    const onTouchEnd = (e) => {
+      if (window.PointerEvent) {
+        return;
+      }
+      if (typeof e?.preventDefault === 'function') {
+        e.preventDefault();
+      }
+      release();
+    };
+
+    canvas.addEventListener('pointerdown', onPointerDown, { passive: false });
+    canvas.addEventListener('pointermove', onPointerMove, { passive: false });
+    canvas.addEventListener('pointerup', onPointerUp, { passive: false });
+    canvas.addEventListener('pointercancel', onPointerUp, { passive: false });
+    canvas.addEventListener('touchstart', onTouchStart, { passive: false });
+    canvas.addEventListener('touchmove', onTouchMove, { passive: false });
+    canvas.addEventListener('touchend', onTouchEnd, { passive: false });
+    canvas.addEventListener('touchcancel', onTouchEnd, { passive: false });
 
     const onKeyDown = (e) => {
       if (e.key === 'r' && light.broken) {

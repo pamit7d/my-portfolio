@@ -13,6 +13,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/lamp" element={<LampScene />} />
         <Route path="/bulb" element={<LampScene />} />
         <Route path="/games" element={<Games />} />
+        <Route path="/games/:gameId" element={<Games />} />
         <Route path="/*" element={<App />} />
       </Routes>
     </BrowserRouter>

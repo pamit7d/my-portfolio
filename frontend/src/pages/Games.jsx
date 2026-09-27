@@ -1,4 +1,5 @@
-import React, { useState, lazy, Suspense } from 'react';
+import React, { useState, lazy, Suspense, useEffect } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import TicTacToe from '../components/TicTacToe';
 import '../styles/games.css';
 const LampScene = lazy(() => import('./Lamp'));
@@ -18,7 +19,26 @@ const gamesList = [
 ];
 
 const Games = () => {
-    const [selected, setSelected] = useState(null);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { gameId } = useParams();
+    const params = new URLSearchParams(location.search);
+    const selectedFromRoute = gameId || params.get('game');
+    const [selected, setSelected] = useState(selectedFromRoute || null);
+
+    useEffect(() => {
+        const nextGame = selectedFromRoute || null;
+        setSelected(nextGame);
+    }, [selectedFromRoute]);
+
+    const setGame = (gameId) => {
+        if (gameId) {
+            navigate(`/games/${gameId}`, { replace: true });
+        } else {
+            navigate('/games', { replace: true });
+        }
+        setSelected(gameId);
+    };
 
     const renderSelected = () => {
         if (selected === 'ticTacToe') return <TicTacToe />;
@@ -26,7 +46,7 @@ const Games = () => {
             return (
                 <div className="games-overlay">
                     <div className="games-overlay-close">
-                        <button className="lamp-close" aria-label="Close lamp view" onClick={() => setSelected(null)}>
+                        <button className="lamp-close" aria-label="Close lamp view" onClick={() => setGame(null)}>
                             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M15 6 L9 12 L15 18" />
                             </svg>
@@ -58,7 +78,7 @@ const Games = () => {
             {!selected ? (
                 <section className="games-grid">
                     {gamesList.map((g) => (
-                        <article key={g.id} onClick={() => setSelected(g.id)} className="game-card project-card" role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') setSelected(g.id); }}>
+                        <article key={g.id} onClick={() => setGame(g.id)} className="game-card project-card" role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') setGame(g.id); }}>
                             <div className="project-header">
                                 <div className="project-title game-title">{g.title}</div>
                             </div>
@@ -70,7 +90,7 @@ const Games = () => {
                 <section style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <div style={{ width: '100%', maxWidth: 680, display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                         <h2 style={{ margin: 0 }}>{gamesList.find(g => g.id === selected)?.title}</h2>
-                        <button onClick={() => setSelected(null)} style={{ padding: '8px 12px', borderRadius: 6, background: '#f0d2a8', border: 'none', color: '#050505' }}>Back</button>
+                        <button onClick={() => setGame(null)} style={{ padding: '8px 12px', borderRadius: 6, background: '#f0d2a8', border: 'none', color: '#050505' }}>Back</button>
                     </div>
 
                     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>{renderSelected()}</div>
