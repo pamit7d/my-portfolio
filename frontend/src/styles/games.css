@@ -1,0 +1,200 @@
+/* Games page styles: neon heading, animated background, game cards */
+.games-page {
+  min-height: 100vh;
+  padding: 3rem 2rem;
+  color: var(--text-main);
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(0,242,255,0.04), transparent 8%), radial-gradient(800px 400px at 90% 80%, rgba(180,0,255,0.02), transparent 10%), #050505;
+  position: relative;
+  overflow: hidden;
+}
+
+.games-hero {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.games-hero h1 {
+  font-size: 2.25rem;
+  letter-spacing: 0.02em;
+  color: #00f2ff;
+  text-shadow: 0 6px 30px rgba(0,242,255,0.06), 0 0 18px rgba(0,242,255,0.08);
+}
+
+.games-intro {
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.game-card {
+  cursor: pointer;
+  padding: 1.25rem;
+  border-radius: 14px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15));
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.game-card .game-title {
+  color: #00f2ff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.game-card .game-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.game-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 60px -20px rgba(0,242,255,0.12), 0 0 30px rgba(0,242,255,0.06);
+  border-color: rgba(0,242,255,0.5);
+}
+
+.games-overlay-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10010;
+}
+
+/* subtle animated background glow */
+@keyframes floatGlow {
+  0% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-8px) translateX(6px); }
+  100% { transform: translateY(0px) translateX(0px); }
+}
+.games-deco {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.games-deco .glow {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(0,242,255,0.06), transparent 30%);
+  position: absolute;
+  right: -80px;
+  top: -60px;
+  filter: blur(30px);
+  animation: floatGlow 6s ease-in-out infinite;
+}
+.games-deco .glow2 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(180,0,255,0.04), transparent 30%);
+  position: absolute;
+  left: -40px;
+  bottom: -40px;
+  filter: blur(20px);
+  animation: floatGlow 8s ease-in-out infinite reverse;
+}
+
+/* full screen overlay for games that require window coords */
+.games-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000000ee;
+  z-index: 9999;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+/* safety zone size in pixels (adjust to increase invisible padding) */
+.games-overlay {
+  --close-safe-size: 96px;
+}
+
+.games-overlay .games-overlay-close {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 10010;
+}
+
+.lamp-close {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: radial-gradient(circle at 30% 30%, rgba(255,220,160,0.98), rgba(255,200,120,0.9));
+  color: #231f1a;
+  font-size: 18px;
+  box-shadow: 0 10px 36px rgba(255,170,60,0.12), inset 0 -6px 12px rgba(0,0,0,0.08);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.lamp-close:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 22px 56px rgba(255,170,60,0.18), inset 0 -6px 12px rgba(0,0,0,0.08);
+}
+
+.lamp-close svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.lamp-close svg path {
+  stroke: #231f1a;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+/* When the lamp is opened inside the overlay, nudge core HUD and sound UI
+   slightly inward so the lamp-themed close button doesn't overlap them. */
+
+/* Position UI elements relative to the safe zone so they don't overlap the close button */
+.games-overlay [class*="hud"] {
+  left: calc(var(--close-safe-size) + 1rem) !important;
+  top: calc(var(--close-safe-size) * 0.06) !important;
+}
+.games-overlay [class*="soundToggle"] {
+  right: calc(var(--close-safe-size) + 0.75rem) !important;
+  top: calc(var(--close-safe-size) * 0.06) !important;
+}
+
+/* nudge the main heading slightly right when overlay is active to keep layout balanced */
+.games-overlay [class*="textLayer"] {
+  left: calc(var(--close-safe-size) + 2rem) !important;
+  right: 2rem !important;
+}
+
+/* invisible padding (safety) area around the top-left close button */
+.games-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--close-safe-size);
+  height: var(--close-safe-size);
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .games-overlay [class*="hud"],
+  .games-overlay [class*="soundToggle"],
+  .games-overlay [class*="textLayer"] {
+    left: 1rem !important;
+    right: 1rem !important;
+    top: 5rem !important;
+  }
+}

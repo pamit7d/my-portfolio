@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = ({ setView }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -33,6 +35,7 @@ const Navbar = ({ setView }) => {
                     <li><a href="#skills" onClick={() => handleLinkClick('professional')}>Skills</a></li>
                     <li><a href="#achievements" onClick={() => handleLinkClick('professional')}>Achievements</a></li>
                     <li><a href="#contact" onClick={() => handleLinkClick('professional')}>Contact</a></li>
+                    <li><a href="/games" onClick={(e) => { e.preventDefault(); setIsOpen(false); window.scrollTo({ top: 0, behavior: 'instant' }); navigate('/games'); }}>Games</a></li>
                     <li className="nav-divider">|</li>
                     <li><a href="#" onClick={(e) => handleLinkClick('personal', e)} className="nav-highlight">Beyond Work</a></li>
                 </ul>
