@@ -82,9 +82,10 @@ const LampScene = () => {
     }
 
     function resize() {
+      const bounds = canvas.getBoundingClientRect();
+      W = Math.max(1, bounds.width);
+      H = Math.max(1, bounds.height);
       DPR = Math.min(window.devicePixelRatio || 1, 2);
-      W = window.innerWidth;
-      H = window.innerHeight;
       canvas.width = Math.round(W * DPR);
       canvas.height = Math.round(H * DPR);
       glow.width = dark.width = Math.ceil(W * LIGHT_SCALE);
@@ -359,7 +360,11 @@ const LampScene = () => {
 
     const getEventPoint = (event) => {
       const source = event?.touches?.[0] || event?.changedTouches?.[0] || event;
-      return { x: source.clientX, y: source.clientY };
+      const bounds = canvas.getBoundingClientRect();
+      return {
+        x: (source.clientX - bounds.left) * (W / Math.max(bounds.width, 1)),
+        y: (source.clientY - bounds.top) * (H / Math.max(bounds.height, 1)),
+      };
     };
 
     const beginInteraction = (event) => {
@@ -466,6 +471,11 @@ const LampScene = () => {
     };
     window.addEventListener('keydown', onKeyDown);
     window.addEventListener('resize', resize);
+    window.visualViewport?.addEventListener('resize', resize);
+    const resizeObserver = typeof ResizeObserver === 'undefined'
+      ? null
+      : new ResizeObserver(resize);
+    resizeObserver?.observe(canvas);
 
     /* ---------- simulation ---------- */
 
@@ -1040,7 +1050,13 @@ const LampScene = () => {
     function frame(now) {
       if (!switchEl) return;
       const sr = switchEl.getBoundingClientRect();
-      switchRect = { left: sr.left, right: sr.right, top: sr.top, bottom: sr.bottom };
+      const canvasBounds = canvas.getBoundingClientRect();
+      switchRect = {
+        left: sr.left - canvasBounds.left,
+        right: sr.right - canvasBounds.left,
+        top: sr.top - canvasBounds.top,
+        bottom: sr.bottom - canvasBounds.top,
+      };
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       accT += dt;
@@ -1062,10 +1078,16 @@ const LampScene = () => {
       cancelAnimationFrame(rafId);
       canvas.removeEventListener('pointerdown', onPointerDown);
       canvas.removeEventListener('pointermove', onPointerMove);
-      canvas.removeEventListener('pointerup', release);
-      canvas.removeEventListener('pointercancel', release);
+      canvas.removeEventListener('pointerup', onPointerUp);
+      canvas.removeEventListener('pointercancel', onPointerUp);
+      canvas.removeEventListener('touchstart', onTouchStart);
+      canvas.removeEventListener('touchmove', onTouchMove);
+      canvas.removeEventListener('touchend', onTouchEnd);
+      canvas.removeEventListener('touchcancel', onTouchEnd);
       window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('resize', resize);
+      window.visualViewport?.removeEventListener('resize', resize);
+      resizeObserver?.disconnect();
     };
   }, []);
 
@@ -1084,11 +1106,11 @@ const LampScene = () => {
         <h1 className={styles.heading}>Nobody touch<br/>the <span className={styles.accent}>lamp.</span></h1>
         <div className={styles.instructions}>
           Use the switch to turn the bulb on and off.<br/>
-          Use the slingshot to hit the shade, the bulb or the switch.
+          Drag the slingshot to shoot, or the shade to swing it.
         </div>
       </div>
       
-      <canvas ref={canvasRef} className={styles.canvas} style={{ touchAction: 'none' }}></canvas>
+      <canvas ref={canvasRef} className={styles.canvas} aria-label="Interactive lamp game. Drag the slingshot to shoot and drag the lamp to swing it." />
       
       <div className={styles.uiLayer}>
         <div className={styles.hud}>
@@ -1110,7 +1132,7 @@ const LampScene = () => {
         )}
         
         <div className={styles.bottomHint}>
-          flip the switch . pull the pebble back and let go . grab the shade to swing it
+          flip the switch · drag the pebble to shoot · drag the shade to swing
         </div>
 
         <div 

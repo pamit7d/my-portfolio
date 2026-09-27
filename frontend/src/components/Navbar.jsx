@@ -22,13 +22,20 @@ const Navbar = ({ setView }) => {
             <div className="navbar-content">
                 <div className="logo" onClick={() => handleLinkClick('professional')} style={{ cursor: 'pointer' }}>AKP</div>
 
-                <div className={`hamburger ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
+                <button
+                    type="button"
+                    className={`hamburger ${isOpen ? 'active' : ''}`}
+                    onClick={toggleMenu}
+                    aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                    aria-expanded={isOpen}
+                    aria-controls="portfolio-navigation"
+                >
                     <span className="bar"></span>
                     <span className="bar"></span>
                     <span className="bar"></span>
-                </div>
+                </button>
 
-                <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
+                <ul id="portfolio-navigation" className={`nav-links ${isOpen ? 'active' : ''}`}>
                     <li><a href="#hero" onClick={() => handleLinkClick('professional')}>Home</a></li>
                     <li><a href="#projects" onClick={() => handleLinkClick('professional')}>Projects</a></li>
                     <li><a href="#experience" onClick={() => handleLinkClick('professional')}>Experience</a></li>

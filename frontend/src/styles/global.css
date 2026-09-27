@@ -88,3 +88,49 @@ a {
 .neural-canvas {
     display: block;
 }
+/* Shared responsive foundation */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    .section {
+        width: 100%;
+        padding: clamp(3.5rem, 9vw, 5rem) 1rem;
+    }
+
+    .section-title {
+        gap: 0.65rem;
+        margin-bottom: 2rem;
+        font-size: clamp(1.45rem, 5vw, 2rem);
+    }
+}
+
+@media (max-width: 420px) {
+    .section {
+        padding-right: 0.85rem;
+        padding-left: 0.85rem;
+    }
+}

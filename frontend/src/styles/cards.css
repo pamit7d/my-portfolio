@@ -397,3 +397,16 @@
     gap: 0.5rem;
     margin-top: 1rem;
 }
+
+@media (hover: none) and (pointer: coarse) {
+    .project-card:hover,
+    .experience-item:hover,
+    .education-card:hover,
+    .achievement-card:hover,
+    .skill-card:hover {
+        transform: none;
+        border-color: rgba(255, 255, 255, 0.08);
+        box-shadow: none;
+        z-index: auto;
+    }
+}

@@ -114,19 +114,21 @@
 
 /* safety zone size in pixels (adjust to increase invisible padding) */
 .games-overlay {
-  --close-safe-size: 96px;
+  --close-safe-size: clamp(4rem, 12vw, 6rem);
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .games-overlay .games-overlay-close {
   position: absolute;
-  top: 18px;
-  left: 18px;
+  top: max(0.75rem, env(safe-area-inset-top));
+  left: max(0.75rem, env(safe-area-inset-left));
   z-index: 10010;
 }
 
 .lamp-close {
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   border: none;
   background: radial-gradient(circle at 30% 30%, rgba(255,220,160,0.98), rgba(255,200,120,0.9));
@@ -172,12 +174,6 @@
   top: calc(var(--close-safe-size) * 0.06) !important;
 }
 
-/* nudge the main heading slightly right when overlay is active to keep layout balanced */
-.games-overlay [class*="textLayer"] {
-  left: calc(var(--close-safe-size) + 2rem) !important;
-  right: 2rem !important;
-}
-
 /* invisible padding (safety) area around the top-left close button */
 .games-overlay::before {
   content: '';
@@ -190,11 +186,23 @@
 }
 
 @media (max-width: 640px) {
-  .games-overlay [class*="hud"],
-  .games-overlay [class*="soundToggle"],
-  .games-overlay [class*="textLayer"] {
-    left: 1rem !important;
-    right: 1rem !important;
-    top: 5rem !important;
+  .games-overlay [class*="hud"] {
+    top: max(0.65rem, env(safe-area-inset-top)) !important;
+    left: calc(var(--close-safe-size) + 0.65rem) !important;
+    max-width: 48%;
+  }
+
+  .games-overlay [class*="soundToggle"] {
+    top: max(0.5rem, env(safe-area-inset-top)) !important;
+    right: max(0.65rem, env(safe-area-inset-right)) !important;
+  }
+}
+
+
+@media (hover: none) and (pointer: coarse) {
+  .game-card:hover {
+    transform: none;
+    border-color: rgba(255,255,255,0.04);
+    box-shadow: none;
   }
 }
