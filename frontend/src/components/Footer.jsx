@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = ({ socialLinks, email, skills }) => {
     // Flatten all skills for the marquee
@@ -45,8 +46,11 @@ const Footer = ({ socialLinks, email, skills }) => {
                     </div>
                 </div>
 
-                <div className="footer-bottom">
+                <div className="footer-bottom" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
                     <p>© {new Date().getFullYear()} Amit Kumar Pandey. All rights reserved.</p>
+                    <Link to="/lamp" style={{ color: 'inherit', textDecoration: 'none', opacity: 0.5, fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                        🔦 play
+                    </Link>
                 </div>
             </div>
         </footer>
